@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+int main() {
+    char input[1000];
+    scanf("%s", input);
+
+    int frequency[26] = {0};
+    int length = 0;
+
+    for (int i = 0; input[i] != '\0'; i++) {
+        if (input[i] >= 'a' && input[i] <= 'z') {
+            frequency[input[i] - 'a']++;
+            length++;
+        }
+    }
+
+    for (int i = 0; i < length; i++) {
+        for (int j = i + 1; j < length; j++) {
+            if (frequency[input[i] - 'a'] > frequency[input[j] - 'a'] ||
+                (frequency[input[i] - 'a'] == frequency[input[j] - 'a'] && input[i] > input[j])) {
+                char temp = input[i];
+                input[i] = input[j];
+                input[j] = temp;
+            }
+        }
+    }
+
+    printf("%s\n", input);
+
+    return 0;
+}
